@@ -10,7 +10,10 @@ format:
 ---
 Babe Ruth was a professional American baseball player in the MLB from 1914-1935. Ruth is better known as the greatest baseball player of all time. Babe Ruth was been an incredible player in his time, although where would he stand if he was playing in the today’s league? While the averages might look similar to Babe Ruth’s era, there are a lot of factors that must take into account before judging where he stands. By looking at the statistics in the MLB in today’s world and Babe Ruth’s era, the numbers should align that he would not be as significant of a player. He would be another solid MLB hitter.
 ```{r}
+#| message: false
+#| warning: false 
 library(tidyverse)
+
 library(ggalt)
 
 library(ggtext)
@@ -20,23 +23,23 @@ library(patchwork)
 set.seed(1234)
 ```
 ```{r}
-hitters <- read_csv("baseballhitters.csv")
-br <- read_csv("baberuth.csv")
+hitters <- read_csv("data/baseballhitters.csv")
+show_col_types = FALSE
 
-careerops <- hitters %>% 
+ops <- hitters %>% 
   group_by(Player) %>% 
-  mutate(CumOPS = cumsum(`OPS+`)) %>%
+  mutate(OPS = cumsum(`OPS+`)) %>%
   ungroup() %>%
   mutate(Player == str_trim(Player))
 
-bigtime <- careerops %>% group_by(Player) %>% filter(CumOPS == max(CumOPS)) %>% ungroup() %>% filter(CumOPS > 3750)
+bigtime <- ops %>% group_by(Player) %>% filter(OPS == max(OPS)) %>% ungroup() %>% filter(OPS > 3750)
 
-brcumops <- careerops %>% filter(Player == "Babe Ruth")
+brops <- ops %>% filter(Player == "Babe Ruth")
   
 ggplot() + 
-  geom_step(data=careerops, aes(x=Team, y=CumOPS, group=Player), color="grey") + 
-  geom_point(data=bigtime, aes(x=Team, y=CumOPS, group=Player, color=Player)) +
-  geom_step(data=brcumops, aes(x=Team, y=CumOPS, group=Player), color="red")+
+  geom_step(data=ops, aes(x=Team, y=OPS, group=Player), color="grey") + 
+  geom_point(data=bigtime, aes(x=Team, y=OPS, group=Player, color=Player)) +
+  geom_step(data=brops, aes(x=Team, y=OPS, group=Player), color="red")+
     labs(
 title= "Does Babe Ruth have a cumulative OPS that is better from the players in his time?",
 subtitle = "Babe Ruth' cumulative OPS was well above average. With nine seasons above .700, Ruth was outstanding when it comes to his on base percentage and slugging.",
@@ -48,42 +51,41 @@ y = "Cumulative OPS",
   theme(
     plot.subtitle = element_textbox_simple(),
     plot.title.position = "plot",
-    plot.title = element_text(size = 12, face = "bold")
+    plot.title = element_text(size = 12, face = "bold"),
+#| message: false
+#| warning: false 
+
+
   )
 ```
----
-Babe Ruth had his all time high of a 255 OPS+ in 1920, while playing for the New York Yankees as a slugging outfielder. That year was his best year in the league. With an OPS of 1.379, slugging at .847, and an OBP of .532: he was an unstoppable player.
-
 ```{r}
-bigtimecareer <- careerops %>% filter(Player %in% bigtime$Player)
-hr <- ggplot() + 
-  geom_beeswarm(
-    data=bigtimecareer, 
-    groupOnX=TRUE, 
-    aes(x=HR, y=Player), color="red") +
+bryears <- hitters %>% 
+filter(Season >= 1914 & Season <= 1935
+) %>%
+  group_by(Season) %>%
+  summarize(
+    Games = sum(G),
+    Hits = sum(H)
+  ) %>%
+  mutate(
+    HPG = Hits/Games
+  ) 
+
+brhpg <- br %>% mutate(HPG = H/G)
+
+line1 <- ggplot() + 
+  geom_line(data=bryears, aes(x=Season, y=HPG), color="black") +
+  geom_line(data=brhpg, aes(x=Year, y=HPG), color="red") +
+  scale_y_continuous(limits = c(.4, 1.4)) +
   labs(
-    x="Home Runs",
-    y=""
+    x="",
+    y="Hits Per Game"
   ) +
   theme_minimal()
-
-so <- ggplot() + 
-  geom_beeswarm(
-    data=bigtimecareer, 
-    groupOnX=TRUE, 
-    aes(x=SO, y=Player), color="light blue") +
-  labs(
-    x="Home Runs",
-    y=""
-  ) +
-  theme_minimal()
-
-(hr + so) +
-  plot_annotation(
-title= "Where does Babe Ruth statisitcally stand in strike outs and home runs?",
-subtitle = "Babe Ruth was an outlier in both. While he was a lower contestant on number of strikeouts, he was ahead on his number of home runs\n in comparison to the other players.",
-caption = "Source: Baseball Reference | By Kaitlyn Schmeling",
-theme = theme(plot.title = element_text(size = 14, face = "bold")) & theme(plot.subtitle = element_text(size=8))
-)
 ```
+
+Babe Ruth and Mike Trout are easily top MLB players to date. By looking at each season and hits per game both players had, were able to see how Babe Ruth was a significantly better batter in his time.
+
+
+
 
