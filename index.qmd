@@ -5,7 +5,7 @@ date: '2024-12-15'
 categories: [BabeRuth, MLB, Mike Trout]
 image: "image.png"
 format: 
-  html: kaitlynjschmeling.github.io
+  html: 
     code-fold: true
 ---
 
