@@ -8,7 +8,7 @@ website:
     right:
       - about.qmd
       - icon: github
-        href: https://github.com/kaitlynschmeling
+        href: https://github.com/kaitlynjschmeling
       - icon: twitter
         href: https://twitter.com/kaitlynschmeling
 favicon: logo.png
