@@ -8,7 +8,8 @@ format:
   html:
     code-fold: true
 ---
-Babe Ruth was a professional baseball player in the MLB from 1914-1935. Babe is also known as the greatest baseball player of all time. Babe Ruth was been an incredible player in his time, although where would he stand if he was playing in the today’s league? There are alot of things that we must take into a look at before seeing where he stands. By looking at the statistics in the MLB in today’s world and Babe Ruth’s era, the numbers should align that he would not be as significant of a player.
+
+Babe Ruth was a professional baseball player in the MLB from 1914-1935. Babe is also known as the greatest baseball player of all time. Babe Ruth was been an incredible player in his time, although where would he stand if he was playing in the today's league? There are alot of things that we must take into a look at before seeing where he stands. By looking at the statistics in the MLB in today's world and Babe Ruth's era, the numbers should align that he would not be as significant of a player.
 
 ```{r}
 #| message: false
@@ -60,9 +61,10 @@ y = "Cumulative OPS",
   )
 
 ```
----
-Babe Ruth had his all time high of a 255 OPS+ in the year of 1920, while playing for the New York Yankees as an outfielder. That year was his best year in the league by far I would say. With an OPS of 1.379, he was a player that you should keep your eye on.
 
+------------------------------------------------------------------------
+
+Babe Ruth had his all time high of a 255 OPS+ in the year of 1920, while playing for the New York Yankees as an outfielder. That year was his best year in the league by far I would say. With an OPS of 1.379, he was a player that you should keep your eye on.
 
 ```{r}
 #| message: false
@@ -101,5 +103,9 @@ caption = "Source: Baseball Reference | By Kaitlyn Schmeling",
 theme = theme(plot.title = element_text(size = 14, face = "bold")) & theme(plot.subtitle = element_text(size=8))
 )
 ```
+
+In his time, there wasn't any players close to the ability of Babe Ruth.
+
+Striking out is something so significant in a players game that you have to be looking for. In 1923, our data shows that he struck out more than any other player in the Major League Baseball. Strikeouts only will show us so much and how they are as a baseball player. While his numbers are not what you might expect from one of the greatest of all time, the home runs hit by Ruth were significantly higher than all other big time players.
 
 Babe Ruth was an incredible MLB player. Many players have come close to his records and stats, but at the rate of technology and statistics that have been taken, it is nearly impossible to achieve what Babe Ruth did.
