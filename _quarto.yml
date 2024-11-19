@@ -1,6 +1,6 @@
 project:
   type: website
-
+publishDir: "../kaitlynjschmeling.github.io"
 website:
   title: "Blog"
   description: "A blog about the best baseball player"
@@ -19,6 +19,7 @@ format:
     light: litera
     dark: cyborg
     css: styles.css
+    
 
 
 
