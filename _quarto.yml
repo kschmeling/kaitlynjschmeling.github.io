@@ -1,6 +1,6 @@
 project:
   type: website
-publishDir: "../kaitlynjschmeling.github.io"
+publishDir: "../kaitlynschmeling.github.io"
 website:
   title: "Blog"
   description: "A blog about the best baseball player"
